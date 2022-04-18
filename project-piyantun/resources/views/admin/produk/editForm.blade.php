@@ -2,14 +2,15 @@
 
 @section('content')
     
-
 <div class="content">
     <div class="row">
-  
-        <div class="col-lg-8 mx-auto">
+        
+     @include('admin.produk.sideMenu')
+
+        <div class="col-lg-9">
             <div class="card card-default">
                 <div class="card-header card-header-border-bottom">
-                        <h2>Tambah Produk</h2>
+                        <h2>Pembaruan Produk</h2>
                 </div>
 
                 <div class="card-body">
