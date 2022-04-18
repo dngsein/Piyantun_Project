@@ -44,7 +44,16 @@ class HomeController extends Controller
         return view('admin.katalog.index');
     }
 
+    
     public function next(){
         return view('auth.next');
     }
 }
+
+// public function welcome() {
+//     return view('home');
+// }
+
+// public function default() {
+//     return view('welcome');
+// }
