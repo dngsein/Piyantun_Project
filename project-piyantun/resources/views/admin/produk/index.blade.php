@@ -22,6 +22,7 @@
                             <th>Harga</th>
                             <th>Stok</th>
                             <th>Detail</th>
+                            
                             <th>Action</th>
                         </thead>
                         <tbody>
@@ -33,6 +34,7 @@
                                     <td>{{ $product->harga }}</td>
                                     <td>{{ $product->stok }}</td>
                                     <td>{{ $product->detail }}</td>
+                                    
                                 
                                     <td>
                                         <a href="{{ url('produk/'. $product->id .'/edit') }}" class="btn btn-warning btn-sm">Edit</a>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+
 use Auth;
 
 class HomeController extends Controller
@@ -22,15 +24,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
+
     public function index()
     {
+
+        $products = Product::paginate(9);
         $role=Auth::user()->role;
     
         if ($role == 'admin') {
             return view('admin.dashboard.index');
         }
         else if ($role == 'user') {
-            return view('home');
+            return view('home', compact('products'));
         }
         else {
             return view('auth.login');
@@ -40,14 +46,14 @@ class HomeController extends Controller
         // return view('home');
 
 
-    public function katalog() {
-        return view('admin.katalog.index');
-    }
+    // public function katalog() {
+    //     return view('admin.katalog.index');
+    // }
 
     
-    public function next(){
-        return view('auth.next');
-    }
+    // public function next(){
+    //     return view('auth.next');
+    // }
 }
 
 // public function welcome() {

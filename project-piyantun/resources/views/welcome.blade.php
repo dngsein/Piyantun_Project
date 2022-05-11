@@ -75,11 +75,10 @@
       <div class="row">
         <div class="col-md-10 offset-md-1">
           <h1>Profil Rumah Kreatif</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus vel consequuntur distinctio perspiciatis magni. 
-            Aspernatur fugit vitae natus dolores facilis quas eaque rerum sequi, quo, voluptatum fugiat non eos earum. </p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus vel consequuntur distinctio perspiciatis magni. 
-            Aspernatur fugit vitae natus dolores facilis quas eaque rerum sequi, quo, voluptatum fugiat non eos earum. </p>
-
+          <p>Rumah Kreatif merupakan tempat produksi hasil kreatifitas warga RT 11. Misalnya aneka jenis minuman segar. 
+            Minuman ini terbuat dari bahan alami yang ditanam di kebun samping lokasi Rumah Kreatif. 
+            Minuman yang diproduksi ini misalnya teh telang, teh kemangi, wedah okra dan masih banyak yang lain.</p>
+          
         </div>
       </div>
     </div>
@@ -98,20 +97,27 @@
       </div>
     </div>
 <div class="row g-3">
+@foreach ($products as $product)
   <div class="col-lg-4 col-sm-6">
     <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
+    @if ($product->product_images->first())
+    <img src="{{ asset ('storage/uploads/gambar_produk/'. $product->product_images->first()->path) }}" alt="{{ $product->nama}}">
+		@else
+		<img src="{{ asset ('img/aw-snapp.jpg') }}" alt="{{ $product->nama}}">
+		@endif
+      
       <div class="overlay">
         <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="#">Beli</a>
+          <h4 class="text-light">{{ $product->nama }}</h4>
+          <h6 class="text-light">Rp. {{ number_format ($product->harga) }}</h6>
+          <a class="btn btn-outline-light" href="{{ url('produk/'. $product->id.'/detail') }}">Beli</a>
         </div>
       </div>
     </div>
   </div>
+  @endforeach
 
-  <div class="col-lg-4 col-sm-6">
+  <!-- <div class="col-lg-4 col-sm-6">
     <div class="project">
       <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
       <div class="overlay">
@@ -174,7 +180,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
   </div>
 </section>

@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- SA -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
@@ -47,8 +50,23 @@
                 {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="bi bi-person"></i><span class="ms-3">Profile Saya</span></a></li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i><span class="ms-3">Keluar</span></a></li>
+                    <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="bi bi-person"></i><span class="ms-4">Profile Saya</span></a></li>
+
+                    <?php
+                      $pesanan_utama = \App\Models\Pemesanan::where('user_id', Auth::user()->id)->where('status_pemesanan','belum dibayar')->first();
+                      if(!empty($pesanan_utama))
+                        {
+                          $notif = \App\Models\DetailPemesanan::where('pemesanan_id', $pesanan_utama->id)->count(); 
+                        }
+                    ?>
+                    
+                    <li><a class="dropdown-item" href="{{ route('keranjang') }}"><i class="bi bi-cart"></i>
+                    @if(!empty($notif)) 
+                    <span class="badge text-danger">{{$notif}}</span> 
+                    @endif
+                    <span>Keranjang</span></a></li>
+
+                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i><span class="ms-4">Keluar</span></a></li>
                 </ul>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
 
@@ -85,11 +103,10 @@
       <div class="row">
         <div class="col-md-10 offset-md-1">
           <h1>Profil Rumah Kreatif</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus vel consequuntur distinctio perspiciatis magni. 
-            Aspernatur fugit vitae natus dolores facilis quas eaque rerum sequi, quo, voluptatum fugiat non eos earum. </p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus vel consequuntur distinctio perspiciatis magni. 
-            Aspernatur fugit vitae natus dolores facilis quas eaque rerum sequi, quo, voluptatum fugiat non eos earum. </p>
-
+          <p>Rumah Kreatif merupakan tempat produksi hasil kreatifitas warga RT 11. Misalnya aneka jenis minuman segar. 
+            Minuman ini terbuat dari bahan alami yang ditanam di kebun samping lokasi Rumah Kreatif. 
+            Minuman yang diproduksi ini misalnya teh telang, teh kemangi, wedah okra dan masih banyak yang lain.</p>
+          
         </div>
       </div>
     </div>
@@ -107,84 +124,34 @@
         <p>Berbagai produk herbal yang sudah lolos uji laboratorium dan aman untuk dikonsumsi semua kalangan. Pemesanan produk bisa dilakukan melalui website tanpa harus datang ke lokasi langsung</p>
       </div>
     </div>
+
+
 <div class="row g-3">
+@foreach ($products as $product)
   <div class="col-lg-4 col-sm-6">
     <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
-      <div class="overlay">
-        <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="#">Beli</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    
+    <h6>{{$product->product_images->first()->path}}</h6>
 
-  <div class="col-lg-4 col-sm-6">
-    <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
+    @if ($product->product_images->first())
+    <img src="{{ asset ('storage/uploads/gambar_produk/'. $product->product_images->first()->path) }}" alt="{{ $product->nama}}">
+		@else
+		<img src="{{ asset ('img/aw-snapp.jpg') }}" alt="{{ $product->nama}}">
+		@endif
+      
       <div class="overlay">
         <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="">Beli</a>
+        <a href="{{ url('home/katalog/produk/'. $product->id) }}">
+          <h4 class="text-light">{{ $product->nama }}</h4>
+          <h6 class="text-light">Rp. {{ number_format ($product->harga) }}</h6>
+        </a>
+          <a class="btn btn-outline-light" href="{{ url('produk/'. $product->id.'/detail') }}">Beli</a>
         </div>
       </div>
     </div>
   </div>
+  @endforeach
 
-  <div class="col-lg-4 col-sm-6">
-    <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
-      <div class="overlay">
-        <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="">Beli</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-sm-6">
-    <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
-      <div class="overlay">
-        <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="">Beli</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-sm-6">
-    <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
-      <div class="overlay">
-        <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="">Beli</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-4 col-sm-6">
-    <div class="project">
-      <img src="https://jurnaba.co/wp-content/uploads/2019/02/IMG-20190212-WA0020.jpg" alt="">
-      <div class="overlay">
-        <div>
-          <h4 class="text-light">Minuman Bougenvile</h4>
-          <h6 class="text-light">Rp. 20.000</h6>
-          <a class="btn btn-outline-light" href="">Beli</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
   </div>
 </section>
@@ -283,6 +250,7 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+@include('sweetalert::alert')
 </html>

@@ -17,7 +17,7 @@ Route::group(['middleware' => ['auth', 'cekrole:admin']],
 function () 
 {
 	Route::get('home', 'HomeController@index')->name('home');
-
+	
 	Route::get('profile-pengguna', 'ViewPenggunaController@index')->name('akun_pengguna');
 	
 	Route::resource('produk', 'ProdukController');
@@ -25,12 +25,11 @@ function ()
 	Route::get('produk/{productID}/tambah-gambar', 'ProdukController@tambahGambar'); 
 	Route::post('produk/gambar/{productID}', 'ProdukController@uploadGambar'); 
 	Route::delete('produk/gambar/{imageID}', 'ProdukController@hapusGambar')->name('hapusgb'); 
-
-
+	
+	
 	Route::get('profile-admin', 'UserProfileController@index')->name('adminProfile');
 	Route::get('profile-admin/edit', 'UserProfileController@edit')->name('adminProfile.edit');
 	Route::put('profile-admin/update', 'UserProfileController@update')->name('up.profile.admin');
-	
 });
 
 
@@ -38,6 +37,11 @@ function ()
 Route::group(['middleware' => ['auth', 'cekrole:user']], 
 function () 
 {
+	
+	Route::get('produk/{id}/detail', 'DetailController@index');
+	
+	Route::post('produk/{id}/pesan', 'PesananController@pesan');
+	Route::get('keranjang', 'PesananController@keranjang')->name('keranjang');
 	
 	Route::get('home', 'HomeController@index')->name('home');
 	Route::get('profile', 'UserProfileController@index');
@@ -50,8 +54,6 @@ function ()
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'WelcomeController@index');
 
-Route::get('/', function () {
-	return view('welcome');
-});
 

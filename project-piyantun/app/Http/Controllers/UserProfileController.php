@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserProfileController extends Controller
 {
@@ -53,11 +54,12 @@ class UserProfileController extends Controller
         $role=Auth::user()->role;
     
         if ($role == 'admin') {
-            return redirect('profile-admin')->with('message', 'Profile anda berhasil diperbarui');
+            Alert::success('Berhasil', 'Profile berhasil diperbarui');
+            return redirect('profile-admin');
         }
         else if ($role == 'user') {
-            
-            return redirect('profile')->with('message', 'Profile anda berhasil diperbarui');
+            Alert::success('Berhasil', 'Profile berhasil diperbarui');
+            return redirect('profile');
         }
     }
 }
