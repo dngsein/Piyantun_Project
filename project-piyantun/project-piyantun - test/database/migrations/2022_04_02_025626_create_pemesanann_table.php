@@ -13,12 +13,16 @@ class CreatePemesanannTable extends Migration
      */
     public function up()
     {
-        Schema::create('pemesanan', function (Blueprint $table) {
+        Schema::create('pemesanans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('jumlah_pemesanan');
-            $table->enum('status_pemesanan',['belum dibayar', 'dibayar']);
+            $table->unsignedBigInteger('user_id');
+            $table->integer('jumlah_harga');
+            $table->enum('status_pemesanan',['belum dibayar', 'dibayar', 'diterima']);
             $table->date('tanggal_pemesanan');
+
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }

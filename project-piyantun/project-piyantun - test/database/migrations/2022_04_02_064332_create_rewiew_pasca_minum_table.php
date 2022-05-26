@@ -15,11 +15,17 @@ class CreateRewiewPascaMinumTable extends Migration
     {
         Schema::create('rewiew_pasca_minum', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('pemesanan_id');
             $table->string('nama_pelanggan');
             $table->integer('rating_rasa');
             $table->integer('rating_manfaat');
             $table->text('ulasan');
+
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('pemesanan_id')->references('id')->on('pemesanan');
         });
     }
 
