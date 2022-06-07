@@ -17,23 +17,28 @@ Route::group(['middleware' => ['auth', 'cekrole:admin']],
 function () 
 {
 	Route::get('home', 'HomeController@index')->name('home');
+	Route::get('data-segmentasi', 'HomeController@data_segmentasi')->name('dashboard.segmentasi');
 	
 	Route::get('profile-pengguna', 'ViewPenggunaController@index')->name('akun_pengguna');
 	
+
 	Route::resource('produk', 'ProdukController');
 	Route::get('produk/{productID}/gambar', 'ProdukController@gambar')->name('gambar');
 	Route::get('produk/{productID}/tambah-gambar', 'ProdukController@tambahGambar'); 
 	Route::post('produk/gambar/{productID}', 'ProdukController@uploadGambar'); 
 	Route::delete('produk/gambar/{imageID}', 'ProdukController@hapusGambar')->name('hapusgb'); 
 	
+
+	Route::get('grafik-penjualan', 'GrafikController@index')->name('grafik');
 	
+
 	Route::get('profile-admin', 'UserProfileController@index')->name('adminProfile');
 	Route::get('profile-admin/edit', 'UserProfileController@edit')->name('adminProfile.edit');
 	Route::put('profile-admin/update', 'UserProfileController@update')->name('up.profile.admin');
 
-	Route::resource('pengeluaran', 'PengeluaranController');
-	Route::resource('pemesanan', 'MonitorPemesananController');
-	// Route::get('pemesanan', 'AdminPemesananController@pemesanan');
+	Route::resource('dokumentasi/pengeluaran', 'PengeluaranController');
+	Route::resource('dokumentasi/pemesanan', 'MonitorPemesananController');
+	Route::get('dokumentasi/pendapatan', 'ReportController@revenue')->name('pendapatan');
 
 });
 
@@ -49,10 +54,13 @@ function ()
 
 	Route::get('keranjang', 'PesananController@keranjang')->name('keranjang');
 	Route::delete('keranjang/{id}', 'PesananController@delete');
-
+	
 	Route::get('riwayat-pemesanan', 'RiwayatPemesananController@riwayat')->name('riwayatPemesanan');
 	Route::get('riwayat-pemesanan/{id}/edit', 'RiwayatPemesananController@edit')->name('riwayatPemesanan.edit');
 	Route::put('riwayat-pemesanan/{id}/update', 'RiwayatPemesananController@update')->name('riwayatPemesanan.update');
+	Route::post('riwayat-pemesanan', 'RiwayatPemesananController@rating')->name('riwayatPemesanan.rating');
+	
+	
 
 	Route::get('home', 'HomeController@index')->name('home');
 	Route::get('profile', 'UserProfileController@index');
