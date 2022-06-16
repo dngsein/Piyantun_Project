@@ -60,7 +60,7 @@
           <div class="sub-menu"> 
             <li >
               <a class="sidenav-item-link" href="{{ route('grafik') }}">
-                <span class="nav-text">Grafik Penjualan</span>
+                <span class="nav-text">Grafik </span>
               </a>
             </li>
           </div>
@@ -78,7 +78,7 @@
           <div class="sub-menu"> 
             <li >
               <a class="sidenav-item-link" href="{{ route ('akun_pengguna') }}">
-                <span class="nav-text">Tabel Akun Pengguna</span>
+                <span class="nav-text">Profil Customer</span>
               </a>
             </li>
           </div>
@@ -94,11 +94,7 @@
         <ul  class="collapse"  id="documentation"
           data-parent="#sidebar-menu">
           <div class="sub-menu">
-                <li >
-                  <a class="sidenav-item-link" href="{{ url('dokumentasi/pengeluaran') }}">
-                    <span class="nav-text">Pengeluaran</span>
-                  </a>
-                </li>
+    
 
                 <li >
                   <a class="sidenav-item-link" href="{{url('dokumentasi/pemesanan')}}">
@@ -107,7 +103,7 @@
                 </li>
                 <li >
                   <a class="sidenav-item-link" href="{{route('pendapatan')}}">
-                    <span class="nav-text">Pendapatan</span>
+                    <span class="nav-text">Report</span>
                   </a>
                 </li>
           </div>

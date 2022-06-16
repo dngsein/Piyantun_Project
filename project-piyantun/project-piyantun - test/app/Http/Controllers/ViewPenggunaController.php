@@ -14,15 +14,16 @@ class ViewPenggunaController extends Controller
      */
     public function index()
     {
-        $this->data['users'] = User::orderBy('id', 'ASC')->paginate(10);
+        $this->data['users'] = User::orderBy('id', 'ASC')
+                                    ->where('role', 'user')->paginate(10);
         return view('admin.akunUser.index', $this->data);
     }
 
-    public function pdf () 
-	{
-		$users = User::orderBy('id', 'ASC')->paginate(10);
-        $pdf = PDF::loadview('admin.akunUser.pdf', ['users' => $users])->setOptions(['defaultFont' => 'sans-serif']);
-        return $pdf->download('akun_user.pdf');
+    // public function pdf () 
+	// {
+	// 	$users = User::orderBy('id', 'ASC')->paginate(10);
+    //     $pdf = PDF::loadview('admin.akunUser.pdf', ['users' => $users])->setOptions(['defaultFont' => 'sans-serif']);
+    //     return $pdf->download('akun_user.pdf');
 
-	}
+	// }
 }

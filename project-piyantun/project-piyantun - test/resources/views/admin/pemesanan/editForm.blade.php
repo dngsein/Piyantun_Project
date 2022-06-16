@@ -68,14 +68,10 @@
 			      		</div>
 
                         <div class="form-footer pt-5 border-top text-right">
-                            <form action="{{url('dokumentasi/pemesanan/'. $pesanan->id.'/delete') }}" method="post">
-                            @csrf
-                            {{ method_field('DELETE')}}
-                              <button type="submit" class="btn btn-danger btn-default mx-4">Batalkan Pemesanan</button>
-                            </form>
 
-                            <button type="submit" class="btn btn-primary ml-4 btn-default">Save</button>
-                            <a href="{{ url('dokumentasi/pemesanan') }}" class="btn btn-secondary btn-default">Back</a>
+
+                            <button type="submit" class="btn btn-primary ml-4 btn-default">Simpan</button>
+                            <a href="{{ url('dokumentasi/pemesanan') }}" class="btn btn-secondary btn-default">Batal</a>
                         </div>
                     {!! Form::close() !!}
                     

@@ -74,7 +74,7 @@ class PesananController extends Controller
 
         // -----------
 
-        Alert::success('Berhasil', 'Pesanan ditambahkan kedalam keranjang');
+        Alert::success('Berhasil', 'Produk telah ditambahkan di keranjang');
 
         return redirect('home#produk');
     }

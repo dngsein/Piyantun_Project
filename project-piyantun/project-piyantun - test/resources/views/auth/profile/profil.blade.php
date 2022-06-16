@@ -46,7 +46,7 @@
                 {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="bi bi-person"></i><span class="ms-4">Profile Saya</span></a></li>
+                    <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="bi bi-person"></i><span class="ms-4">Profil</span></a></li>
 
                     <?php
                       $pesanan_utama = \App\Models\Pemesanan::where('user_id', Auth::user()->id)->where('status_pemesanan','belum dibayar')->first();
@@ -110,7 +110,7 @@
                 <div class="d-flex justify-content-between align-items-center experience"><span>Keamanan</span></div>
                 <div class="col-md-12 mt-1"><label class="labels mt-4">Role</label><input id="role"  type="text" class="form-control bg-white"  value="{{ Auth::user()->role}}" readonly></div>
                 <div class="mt-5 text-end">
-                    <a class="btn btn-primary profile-button" href="{{ url('profile/edit') }}">Edit Profile</a>
+                    <a class="btn btn-primary profile-button" href="{{ url('profile/edit') }}">Edit Profil</a>
                 </div>
             </div>
 

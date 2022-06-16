@@ -18,7 +18,7 @@ class ReportController extends Controller
 		];
 	}
 
-    public function revenue (Request $request)
+    public function report (Request $request)
     {
         // $this->data['currentAdminSubMenu'] = 'pendapatan';
         
@@ -112,31 +112,15 @@ class ReportController extends Controller
 		foreach($pesanan as $value){
 			$data[$value->hari] = ['jumlah'=>$value->jumlah,'total'=>$value->total];
 		}
-
+		$bulann = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','Sepetember','Oktober','November','Desember'];
+		$bulan_tahun = $bulann[intval($bulan)-1]. ' ' . $tahun;
 
 		
 		// dd($data);
-        return view('admin.reports.pendapatan',compact('data','bulan','tahun','endDate'), $this->data);
+        return view('admin.reports.pendapatan',compact('data','bulan','tahun','endDate', 'bulan_tahun'), $this->data);
     }
 
-	public function cetak (Request $request){
-		$bulan = $request->has('bulan')?$request->bulan:date('m');
-		$tahun = $request->has('tahun')?$request->tahun:date('Y');
-		$endDate = date('t',strtotime($tahun.'-'.str_pad($bulan,2,0,STR_PAD_LEFT).'-01'));
 
-        $this->data['currentAdminSubMenu'] = 'pendapatan';
-        $pesanan = Pemesanan::selectRaw('DAY(tanggal_pemesanan) as hari, COUNT(id) as jumlah, SUM(jumlah_harga) as total')
-						->whereRaw("MONTH(tanggal_pemesanan)=$bulan AND YEAR(tanggal_pemesanan)=$tahun")
-						->groupBy(\DB::raw('DAY(tanggal_pemesanan)'))
-						->get();
-		$data=[];
-		foreach($pesanan as $value){
-			$data[$value->hari] = ['jumlah'=>$value->jumlah,'total'=>$value->total];
-		}
-		// dd($data);
-        return view('admin.reports.lap',compact('data','bulan','tahun','endDate'), $this->data);
-		
-	}
 	public function print (Request $request){
 		$bulan = $request->has('bulan')?$request->bulan:date('m');
 		$tahun = $request->has('tahun')?$request->tahun:date('Y');
@@ -145,14 +129,18 @@ class ReportController extends Controller
         $this->data['currentAdminSubMenu'] = 'pendapatan';
         $pesanan = Pemesanan::selectRaw('DAY(tanggal_pemesanan) as hari, COUNT(id) as jumlah, SUM(jumlah_harga) as total')
 						->whereRaw("MONTH(tanggal_pemesanan)=$bulan AND YEAR(tanggal_pemesanan)=$tahun")
+						->whereRaw("status_pemesanan= 'diterima' ")
 						->groupBy(\DB::raw('DAY(tanggal_pemesanan)'))
 						->get();
 		$data=[];
 		foreach($pesanan as $value){
 			$data[$value->hari] = ['jumlah'=>$value->jumlah,'total'=>$value->total];
 		}
+
+		$bulann = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','Sepetember','Oktober','November','Desember'];
+		$bulan_tahun = $bulann[intval($bulan)]. ' ' . $tahun;
 		// dd($data);
-        return view('admin.reports.lap',compact('data','bulan','tahun','endDate'), $this->data);
+        return view('admin.reports.lap',compact('data','bulan','tahun','endDate', 'bulan_tahun'), $this->data);
 		
 	}
 

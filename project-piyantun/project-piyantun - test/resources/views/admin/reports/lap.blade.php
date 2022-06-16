@@ -46,7 +46,7 @@
             @php $total1=0; $total2=0; @endphp
 			@foreach(range(1,$endDate) as $v)
   				<tr>
-					<td>{{$v}}</td>
+					<td>{{str_pad($v,2,0,STR_PAD_LEFT)}} {{$bulan_tahun}}</td>
 					<td>{{$ttl = intval(@$data[$v]['jumlah'])}}</td>
 					<td>{{$sumttl = intval(@$data[$v]['total'])}}</td>
 				</tr>

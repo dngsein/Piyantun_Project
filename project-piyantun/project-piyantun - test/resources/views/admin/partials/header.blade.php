@@ -9,7 +9,7 @@
 
   <div class="navbar-right ">
     <ul class="nav navbar-nav">
-      
+    <li><a class="dropdown-item" href="{{ route ('adminProfile') }}"><i class="mdi mdi-account"></i><span class="ms-3">Profil</span></a></li>
       <!-- User Account -->
       <li class="dropdown user-menu">
         <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -24,13 +24,15 @@
           </li>
           <li>
          
-                    <li><a class="dropdown-item" href="{{ route ('adminProfile') }}"><i class="mdi mdi-account"></i><span class="ms-3">Profile Saya</span></a></li>
+                    
                     <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-exit-to-app"></i><span class="ms-3">Keluar</span></a>
                
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                 </li>
 
         </ul>
+
+        
       </li>
     </ul>
   </div>

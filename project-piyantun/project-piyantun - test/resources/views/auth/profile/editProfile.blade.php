@@ -142,7 +142,7 @@
                           
 
 		            <div class="form-group">
-		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3 mt-3">Simpan Perubahan</button>
+		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3 mt-3">Simpan</button>
 		            </div>
 <br>
 		          </form>

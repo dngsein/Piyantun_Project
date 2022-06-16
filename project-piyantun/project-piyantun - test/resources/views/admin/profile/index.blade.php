@@ -40,7 +40,7 @@
                 <div class="d-flex justify-content-between align-items-center experience"><span>Keamanan</span></div>
                 <div class="col-md-12 mt-1"><label class="labels mt-4">Role</label><input id="role"  type="text" class="form-control bg-white"  value="{{ Auth::user()->role}}" readonly></div>
                 <div class="mt-5 text-right">
-                    <a class="btn btn-primary  profile-button" href="{{ route('adminProfile.edit') }}">Edit Profile</a>
+                    <a class="btn btn-primary  profile-button" href="{{ route('adminProfile.edit') }}">Edit Profil</a>
                 </div>
             </div>
 

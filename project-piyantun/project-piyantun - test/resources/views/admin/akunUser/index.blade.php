@@ -9,11 +9,11 @@
             <div class="container">
                 <div class="card">
                     <div class="card-header text-dark bg-white">
-                        <h3>Tabel Akun Pengguna</h3>
+                        <h3>Profil Customer</h3>
                     </div>
                     <div class="card-body">
                     @include('admin.partials.flash')
-                    <a href="{{url('profile-pengguna/pdf')}}" class="btn btn-warning btn-md" >Export PDF</a>
+          
                     <div class="table-responsive">
                     <table class="table">
                     <thead class="table-primary">

@@ -37,12 +37,12 @@ function ()
 	Route::get('profile-admin/edit', 'UserProfileController@edit')->name('adminProfile.edit');
 	Route::put('profile-admin/update', 'UserProfileController@update')->name('up.profile.admin');
 	
-	Route::resource('dokumentasi/pengeluaran', 'PengeluaranController');
+	// Route::resource('dokumentasi/pengeluaran', 'PengeluaranController');
+	
 	Route::resource('dokumentasi/pemesanan', 'MonitorPemesananController');
 	Route::delete('dokumentasi/pemesanan/{id}/delete', 'MonitorPemesananController@destroy');
-	Route::get('dokumentasi/pendapatan', 'ReportController@revenue')->name('pendapatan');
-	// Route::get('dokumentasi/pendapatan/pdf', 'ReportController@cetak')->name('report.print');
-	Route::post('dokumentasi/pendapatan/cetak', 'ReportController@print')->name('report.print');
+	Route::get('dokumentasi/pendapatan', 'ReportController@report')->name('pendapatan');
+	Route::get('dokumentasi/pendapatan/cetak', 'ReportController@print')->name('report.print');
 
 });
 

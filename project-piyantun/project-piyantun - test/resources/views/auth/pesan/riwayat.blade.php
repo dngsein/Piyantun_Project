@@ -129,7 +129,7 @@
                       @if($pemesanan->status_pemesanan == 'diterima')
                         @if(empty($pemesanan->review))
                             <td align="center">
-                                <button type="button" class="btn btn-success btn-sm btn_review" data-id="{{$pemesanan->id}}">Add Review</button>
+                                <button type="button" class="btn btn-success btn-sm btn_review" data-id="{{$pemesanan->id}}">Tambah Review</button>
                             </td>
                         @else
                             <td>
@@ -197,7 +197,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" form="form_rating" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
       </div>
     </div>
   </div>

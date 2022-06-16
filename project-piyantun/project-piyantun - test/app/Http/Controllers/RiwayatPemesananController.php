@@ -12,7 +12,8 @@ class RiwayatPemesananController extends Controller
 {
     public function riwayat()
     {
-        $pesanan = Pemesanan::where('user_id', Auth::user()->id)->where('status_pemesanan', 'dibayar')
+        $pesanan = Pemesanan::orderBy('id', 'DESC')
+                            ->where('user_id', Auth::user()->id)->where('status_pemesanan', 'dibayar')
                             ->orWhere('user_id', Auth::user()->id)->where('status_pemesanan', 'diterima')
                             ->get();
         return view('auth.pesan.riwayat', compact('pesanan'));

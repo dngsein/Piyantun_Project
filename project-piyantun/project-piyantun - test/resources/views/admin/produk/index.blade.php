@@ -38,7 +38,7 @@
                                     
                                 
                                     <td>
-                                        <a href="{{ url('produk/'. $product->id .'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ url('produk/'. $product->id .'/edit') }}" class="btn btn-warning btn-sm">Edit Produk</a>
 
                                         {!! Form::open(['url' => 'produk/'.$product->id, 'class' => 'delete', 'style' => 'display:inline-block']) !!}
                                         {!! Form::hidden('_method', 'DELETE') !!}
@@ -56,7 +56,7 @@
                     {{ $products->links() }}
                         </div>
                             <div class="card-footer bg-white text-right">
-                                <a href="{{ url('produk/create') }}" class="btn btn-primary">Data Baru</a>
+                                <a href="{{ url('produk/create') }}" class="btn btn-primary">Tambah Produk</a>
                             </div>
                         </div>
                     </div>

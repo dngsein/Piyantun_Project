@@ -7,7 +7,7 @@
 			<div class="col-lg-12">
 				<div class="card card-default">
 					<div class="card-header card-header-border-bottom">
-						<h2>Revenue Report</h2>
+						<h2>Report Penjualan</h2>
 					</div>
 					<div class="card-body">
 						@include('admin.partials.flash')
@@ -21,11 +21,14 @@
 								</select>
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-success">Filter</button>
-									<a href="{{url('dokumentasi/pendapatan/pdf')}}" class="btn btn-warning btn-md ml-4" >Export PDF</a>
+									<button type="submit" formaction="{{route('report.print')}}" class="btn btn-success ml-4">Export PDF</button>
+									
 								</div>
 							</div>
 						</form>
-						<form action="{{route('report.print')}}" target="_blank" method="get"></form>
+						<form action="{{route('report.print')}}" target="_blank" method="get">
+
+						</form>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<th>Tanggal</th>
@@ -36,7 +39,7 @@
 								@php $total1=0; $total2=0; @endphp
 								@foreach(range(1,$endDate) as $v)
   									<tr>
-										<td>{{$v}}</td>
+										<td>{{str_pad($v,2,0,STR_PAD_LEFT)}} {{$bulan_tahun}}</td>
 										<td>{{$ttl = intval(@$data[$v]['jumlah'])}}</td>
 										<td>{{$sumttl = intval(@$data[$v]['total'])}}</td>
 									</tr>
