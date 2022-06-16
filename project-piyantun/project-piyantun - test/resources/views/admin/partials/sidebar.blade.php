@@ -59,7 +59,7 @@
           data-parent="#sidebar-menu">
           <div class="sub-menu"> 
             <li >
-              <a class="sidenav-item-link" href="chartjs.html">
+              <a class="sidenav-item-link" href="{{ route('grafik') }}">
                 <span class="nav-text">Grafik Penjualan</span>
               </a>
             </li>
@@ -95,14 +95,19 @@
           data-parent="#sidebar-menu">
           <div class="sub-menu">
                 <li >
-                  <a class="sidenav-item-link" href="{{ url('pengeluaran') }}">
+                  <a class="sidenav-item-link" href="{{ url('dokumentasi/pengeluaran') }}">
                     <span class="nav-text">Pengeluaran</span>
                   </a>
                 </li>
 
                 <li >
-                  <a class="sidenav-item-link" href="{{url('pemesanan')}}">
+                  <a class="sidenav-item-link" href="{{url('dokumentasi/pemesanan')}}">
                     <span class="nav-text">Pemesanan</span>
+                  </a>
+                </li>
+                <li >
+                  <a class="sidenav-item-link" href="{{route('pendapatan')}}">
+                    <span class="nav-text">Pendapatan</span>
                   </a>
                 </li>
           </div>

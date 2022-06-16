@@ -12,8 +12,8 @@
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
     <!-- Required Extention -->
     
@@ -22,41 +22,59 @@
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     
     <!-- CSS Style -->
-	<link rel="stylesheet" href="{{ asset ('assetLogin/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset ('css/style_detail.css') }}">
+
+    <link rel="stylesheet" href="{{ asset ('css/profile.css') }}">
 
     <title>Piyantun</title>
     <link rel="shortcut icon" href="https://thumbs.dreamstime.com/b/print-163361306.jpg">
   </head>
   <body>
- <!-- Navbar  -->
- <nav class="navbar navbar-expand-lg py-2 fixed-top navbar-light mb-4">
-  <div class="container-xl">
-    <a class="navbar-brand" href="{{ url('home') }}"><span>Piyantun<span></a>
+<!-- Navbar  -->
+<nav class="navbar navbar-expand-lg py-2 fixed-top navbar-light ">
+  <div class="container">
+    <a class="navbar-brand" href="#"><span>Piyantun<span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ms-auto">
-        <li class="nav-item ms-3">
-          <a class="nav-link active" aria-current="page" href="{{ url('home') }}">Home</a>
-        </li>
-        <li class="nav-item ms-3">
-          <a class="nav-link active" aria-current="page" href="{{ url('home#produk') }}">Produk</a>
-        </li>
-        <li class="nav-item ms-2 dropdown">
-                <a class="btn dropdown-toggle text-dark" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="navbar-nav ms-auto">
+            <li class="nav-item ms-3">
+            <a class="nav-link active" aria-current="page" href="{{url('home')}}">Home</a>
+            </li>
+            <li class="nav-item ms-3">
+            <a class="nav-link" href="{{url('home#produk')}}">Produk</a>
+            </li>
+
+            <li class="nav-item ms-2 dropdown">
+                <a class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="bi bi-person"></i><span class="ms-3">Profile Saya</span></a></li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i><span class="ms-3">Keluar</span></a></li>
+                    <li><a class="dropdown-item" href="{{ url('profile') }}"><i class="bi bi-person"></i><span class="ms-4">Profile Saya</span></a></li>
+
+                    <?php
+                      $pesanan_utama = \App\Models\Pemesanan::where('user_id', Auth::user()->id)->where('status_pemesanan','belum dibayar')->first();
+                      if(!empty($pesanan_utama))
+                        {
+                          $notif = \App\Models\DetailPemesanan::where('pemesanan_id', $pesanan_utama->id)->count(); 
+                        }
+                    ?>
+                    
+                    <li><a class="dropdown-item" href="{{ route('keranjang') }}"><i class="bi bi-cart"></i>
+                    @if(!empty($notif)) 
+                    <span class="badge badge-danger text-danger">{{$notif}}</span>   
+                    @endif
+                    <span class="ms-4">Keranjang</span></a></li>
+
+                    <li><a class="dropdown-item" href="{{ route('riwayatPemesanan') }}" ><i class="bi bi-card-checklist"></i></i><span class="ms-4">Riwayat Pemesanan</span></a></li>
+                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-right"></i><span class="ms-4">Keluar</span></a></li>
                 </ul>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
 
-            </li>   
-      </div>
+            </li>
+        </div>
     </div>
   </div>
 </nav>

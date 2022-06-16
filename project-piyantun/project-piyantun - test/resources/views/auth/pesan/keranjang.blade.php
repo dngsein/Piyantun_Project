@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <!-- CSS Style -->
     <link rel="stylesheet" href="{{ asset ('css/style.css') }}">
@@ -144,20 +146,33 @@
                     </tr>
                   </div>
                     </table>
+
+                        <form class="contact100-form validate-form" id="whatsapp">      
+                            <input hidden class="tujuan" type="hidden" id="noAdmin">  
+                            <input hidden class="input100 keterangan" type="text" value="-----Pemesanan------">
+                            <input hidden class="input100 nama" type="text" value="{{ Auth::user()->name }}">
+                            <input hidden class="input100 id_pemesanan" type="text" value="{{ $pesanan->id }}">
+                            <input hidden class="input100 tanggal" type="text" value="{{ $pesanan->tanggal_pemesanan }}">
+                            <input hidden class="input100 total_harga" value="Rp. {{  number_format($pesanan->jumlah_harga) }}">
+                            <textarea hidden class="input100 produk">
+                            @foreach ($detail as $detail_pemesanan)
+                            {{$detail_pemesanan->nama_produk}} -> {{$detail_pemesanan->jumlah_pemesanan}} item
+                            @endforeach
+                            </textarea>
+                            <textarea hidden class="input100 alamat">{{ Auth::user()->alamat }}</textarea>
+                            <div class="card-footer bg-white text-end">
+                                <a class="btn btn-primary  profile-button form-btn submit">Bayar Sekarang</a>
+                            </div>
+                        </form>
+
                     @endif
                     </div>
-                            <div class="card-footer bg-white text-end">
-                                <a href="{{ url('https://wa.me/+628155117317') }}" class="btn btn-primary  profile-button">Pesan Sekarang</a>
-                            </div>
                         </div>
                   </div>
                 </div>
                     </div>
                 </div>
-       
-
-
-                        
+        
                     </div>
 
                     </div>
@@ -167,6 +182,83 @@
     </div>
 </section>
 
+<script>
+  //no wa admin
+$("#noAdmin").val("085708987136");
+$('.whatsapp-btn').click(function() {
+  $('#whatsapp').toggleClass('toggle');
+});
+// klik kirim
+$('#whatsapp .submit').click(WhatsApp);
+$("#whatsapp input, #whatsapp textarea").keypress(function() {
+  if (event.which == 13) WhatsApp();
+});
+var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+function WhatsApp() {
+  var ph = '';
+  if ($('#whatsapp .nama').val() == '') { // Cek Nama
+    ph = $('#whatsapp .nama').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .nama').focus();
+    return false;
+  } else if ($('#whatsapp .tanggal').val() == '') { // Cek Whatsapp
+    ph = $('#whatsapp .tanggal').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .tanggal').focus();
+    return false;
+  } else if ($('#whatsapp .total_harga').val() == '') { // Cek harga
+    ph = $('#whatsapp .total_harga').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .total_harga').focus();
+    return false;
+  } else if ($('#whatsapp .keterangan').val() == '') { // Cek keterangan
+    ph = $('#whatsapp .keterangan').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .keterangan').focus();
+    return false;
+  } else if ($('#whatsapp .id_pemesanan').val() == '') { // Cek id
+    ph = $('#whatsapp .id_pemesanan').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .id_pemesanan').focus();
+    return false;
+  } else if ($('#whatsapp .alamat').val() == '') { // Cek Alamat
+    ph = $('#whatsapp .alamat').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .alamat').focus();
+    return false;
+  } else if ($('#whatsapp .produk').val() == '') { // Cek produk
+    ph = $('#whatsapp .produk').attr('placeholder');
+    alert('Silahkan tulis ' + ph);
+    $('#whatsapp .produk').focus();
+    return false;
+  } else {
+    // Check Device (Mobile/Desktop)
+    var url_wa = 'https://web.whatsapp.com/send';
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      url_wa = 'whatsapp://send/';
+    }
+    // Get Value
+    var tujuan = $('#whatsapp .tujuan').val(),
+      
+      produk = $('#whatsapp .produk').val(),
+      alamat = $('#whatsapp .alamat').val(),
+      keterangan = $('#whatsapp .keterangan').val(),
+      nama = $('#whatsapp .nama').val(),
+      id_pemesanan = $('#whatsapp .id_pemesanan').val(),
+      tanggal = $('#whatsapp .tanggal').val(),
+      total_harga = $('#whatsapp .total_harga').val();
+    $(this).attr('href', url_wa + '?phone=62 ' + tujuan + '&text= ' + keterangan + '%0ANama : ' + nama + ' %0AID Pemesanan : ' + id_pemesanan  + ' %0ATanggal: ' + tanggal + ' %0AProduk :' + produk  + '%0A%0ATotal Harga : ' + total_harga + '%0AAlamat : ' + alamat);
+    var w = 960,
+      h = 540,
+      left = Number((screen.width / 2) - (w / 2)),
+      tops = Number((screen.height / 2) - (h / 2)),
+      popupWindow = window.open(this.href, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width=' + w + ', height=' + h + ', top=' + tops + ', left=' + left);
+    popupWindow.focus();
+    return false;
+  }
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

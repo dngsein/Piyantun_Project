@@ -107,7 +107,9 @@
           <p>Rumah Kreatif merupakan tempat produksi hasil kreatifitas warga RT 11. Misalnya aneka jenis minuman segar. 
             Minuman ini terbuat dari bahan alami yang ditanam di kebun samping lokasi Rumah Kreatif. 
             Minuman yang diproduksi ini misalnya teh telang, teh kemangi, wedah okra dan masih banyak yang lain.</p>
-          
+          <p>Telah lulus uji laboratorium sehingga aman untuk dikonsumsi oleh semua kalangan usia Segera temukan minuman 
+            herbal yang anda inginkan hanya di Piyantun</p>
+            <p>Rumah Kreatif Desa Mojodeso Kecamatan Kapas, Bojonegoro</p>
         </div>
       </div>
     </div>

@@ -129,11 +129,11 @@
                                 @enderror
 			      		</div>
                
-                    <div class="form-group mb-3">
+                    <div hidden class="form-group mb-3">
 			      			<label class="label" for="role">Role</label>
 			      			<select id="role" name="role" type="text" class="form-select" required>
                             <option value="user">User</option>
-                            <option value="admin">Admin</option>
+                            
                             </select>
 			      		</div>
 

@@ -20,6 +20,7 @@ function ()
 	Route::get('data-segmentasi', 'HomeController@data_segmentasi')->name('dashboard.segmentasi');
 	
 	Route::get('profile-pengguna', 'ViewPenggunaController@index')->name('akun_pengguna');
+	Route::get('profile-pengguna/pdf', 'ViewPenggunaController@pdf')->name('akun_pengguna.pdf');
 	
 
 	Route::resource('produk', 'ProdukController');
@@ -28,17 +29,20 @@ function ()
 	Route::post('produk/gambar/{productID}', 'ProdukController@uploadGambar'); 
 	Route::delete('produk/gambar/{imageID}', 'ProdukController@hapusGambar')->name('hapusgb'); 
 	
-
+	
 	Route::get('grafik-penjualan', 'GrafikController@index')->name('grafik');
 	
-
+	
 	Route::get('profile-admin', 'UserProfileController@index')->name('adminProfile');
 	Route::get('profile-admin/edit', 'UserProfileController@edit')->name('adminProfile.edit');
 	Route::put('profile-admin/update', 'UserProfileController@update')->name('up.profile.admin');
-
+	
 	Route::resource('dokumentasi/pengeluaran', 'PengeluaranController');
 	Route::resource('dokumentasi/pemesanan', 'MonitorPemesananController');
+	Route::delete('dokumentasi/pemesanan/{id}/delete', 'MonitorPemesananController@destroy');
 	Route::get('dokumentasi/pendapatan', 'ReportController@revenue')->name('pendapatan');
+	// Route::get('dokumentasi/pendapatan/pdf', 'ReportController@cetak')->name('report.print');
+	Route::post('dokumentasi/pendapatan/cetak', 'ReportController@print')->name('report.print');
 
 });
 

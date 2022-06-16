@@ -25,19 +25,18 @@
                         <tbody>
 
                         <?php $no = 1 ?>
-                            @forelse ($pengeluaran as $pengeluaran)
+                            @forelse ($pengeluaran as $pengeluarans)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $pengeluaran->nama }}</td>
-                                    <td>{{ $pengeluaran->tanggal }}</td>
-                                    <td>Rp. {{ number_format($pengeluaran->jumlah) }}</td>
+                                    <td>{{ $pengeluarans->nama }}</td>
+                                    <td>{{ $pengeluarans->tanggal }}</td>
+                                    <td>Rp. {{ number_format($pengeluarans->jumlah) }}</td>
                                     
                                 
                                     <td>
-                                        <a href="{{ url('pengeluaran/'. $pengeluaran->id .'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ url('dokumentasi/pengeluaran/'. $pengeluarans->id .'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
 
-                                        {!! Form::open(['url' => 'produk/'.$pengeluaran->id, 'class' => 'delete', 'style' => 'display:inline-block']) !!}
-                                        {!! Form::hidden('_method', 'DELETE') !!}
+                     
                                    
                                     </td>
 
@@ -49,9 +48,10 @@
                             @endforelse
                         </tbody>
                     </table>
+                    {{ $pengeluaran->links() }}
                         </div>
                             <div class="card-footer bg-white text-right">
-                                <a href="{{ url('pengeluaran/create') }}" class="btn btn-primary">Data Baru</a>
+                                <a href="{{ url('dokumentasi/pengeluaran/create') }}" class="btn btn-primary">Data Baru</a>
                             </div>
                         </div>
                     </div>

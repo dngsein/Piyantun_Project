@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="https://thumbs.dreamstime.com/b/print-163361306.jpg">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  
+
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
@@ -22,7 +22,7 @@
   <link href="{{ URL::asset('assetDashboard/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet" />
   <link href="{{ URL::asset('assetDashboard/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
   <link href="{{ URL::asset('assetDashboard/plugins/toastr/toastr.min.css') }}" rel="stylesheet" />
-  
+
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="{{ URL::asset('assetDashboard/css/sleek.css') }}" />
 
@@ -30,12 +30,12 @@
   <script src="{{ URL::asset('assetDashboard/plugins/nprogress/nprogress.js') }}"></script>
 </head>
 
-<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">  
+<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
 
   <div class="mobile-sticky-body-overlay"></div>
         <div class="wrapper">
             @include('admin.partials.sidebar')
-            
+
             <div class="page-wrapper">
                 @include('admin.partials.header')
                 <div class="content-wrapper">
@@ -54,5 +54,6 @@
 <script src="{{ URL::asset('assetDashboard/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ URL::asset('assetDashboard/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ URL::asset('assetDashboard/js/sleek.bundle.js') }}"></script>
+@stack('js');
 </body>
 </html>

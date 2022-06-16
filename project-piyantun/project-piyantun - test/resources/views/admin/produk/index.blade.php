@@ -26,9 +26,10 @@
                             <th>Action</th>
                         </thead>
                         <tbody>
+                        <?php $no = 1 ?>
                             @forelse ($products as $product)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $no++ }}</td>
                                     <td>{{ $product->nama }}</td>
                                     <td>{{ $product->berat }}</td>
                                     <td>{{ $product->harga }}</td>
@@ -52,6 +53,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    {{ $products->links() }}
                         </div>
                             <div class="card-footer bg-white text-right">
                                 <a href="{{ url('produk/create') }}" class="btn btn-primary">Data Baru</a>

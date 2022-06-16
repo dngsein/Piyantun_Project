@@ -15,8 +15,10 @@ class WelcomeController extends Controller
      */
     public function index()
     {
+
+        // dd(bcrypt('1234'));
         $products = Product::paginate(9);
-        
+
         return view('welcome', compact('products'));
     }
 

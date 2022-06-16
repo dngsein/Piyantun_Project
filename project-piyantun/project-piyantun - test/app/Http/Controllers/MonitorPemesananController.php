@@ -19,52 +19,17 @@ class MonitorPemesananController extends Controller
      */
     public function index()
     {
-       
-            $pesanan = Pemesanan::orderBy('id', 'ASC')->paginate(10);
+
+        Pemesanan::whereRaw('TIMESTAMPDIFF(DAY, tanggal_pemesanan, NOW()) > 2 AND status_pemesanan="belum dibayar"')
+                ->update(['status_pemesanan' => 'dibatalkan']);
+
+            $pesanan = Pemesanan::orderBy('id', 'DESC')->paginate(10);
     
             
             return view('admin.pemesanan.pemesanan', compact('pesanan'));
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $pesanan = Pemesanan::findOrFail($id);
@@ -76,13 +41,6 @@ class MonitorPemesananController extends Controller
         return view('admin.pemesanan.editForm', compact ('pesanan', 'detail'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(MonitorPemesananRequest $request, $id)
     {
         $params = $request->except('_token');
@@ -101,17 +59,33 @@ class MonitorPemesananController extends Controller
             Session::flash('error', 'Perubahan gagal disimpan');
         }
 
-        return redirect('pemesanan');
+        return redirect('dokumentasi/pemesanan');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id) 
     {
-        //
+        // $detail = DetailPemesanan::where('id', $id)->first();
+        // $detail->delete();
+
+
+        // $pesanan = Pemesanan::where('id', $id)->first();
+        // $pesanan->delete();
+
+
+        // Session::flash('success', 'Pemesanan telah dibatalkan');
+        // return redirect('dokumentasi/pemesanan');
+
+        // $detail = DetailPemesanan::where('id', $id)->first();
+
+        // $pesanan = Pemesanan::where('id', $detail->pemesanan_id)->first();
+        // $pesanan->jumlah_harga = $pesanan->jumlah_harga - $detail->jumlah_harga;
+        // $pesanan->update();
+
+        // $detail->delete();
+
+        
+        return redirect('dokumentasi/pemesanan');
+
+
     }
 }

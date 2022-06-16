@@ -1,7 +1,4 @@
   
-@extends('admin.layout')
-
-@section('content')
 <div class="content">
 		<div class="row">
 			<div class="col-lg-12">
@@ -11,21 +8,7 @@
 					</div>
 					<div class="card-body">
 						@include('admin.partials.flash')
-						<form method="get">
-							<div class="input-group">
-								<select name="bulan" class="form-control" required>
-									@foreach(['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','Sepetember','Oktober','November','Desember'] as $index => $v) <option value="{{$index+1}}" {{(($index+1)==$bulan)?'selected':''}}>Bulan {{$v}}</option> @endforeach
-								</select>
-								<select name="tahun" class="form-control" required>
-									@foreach(range(2021, date('Y')) as $v) <option value="{{$v}}" {{$tahun==$v?'selected':''}}>Tahun {{$v}}</option> @endforeach
-								</select>
-								<div class="input-group-append">
-									<button type="submit" class="btn btn-success">Filter</button>
-									<a href="{{url('dokumentasi/pendapatan/pdf')}}" class="btn btn-warning btn-md ml-4" >Export PDF</a>
-								</div>
-							</div>
-						</form>
-						<form action="{{route('report.print')}}" target="_blank" method="get"></form>
+						
 						<table class="table table-bordered table-striped">
 							<thead>
 								<th>Tanggal</th>
@@ -56,4 +39,3 @@
 			</div>
 		</div>
 	</div>
-@endsection

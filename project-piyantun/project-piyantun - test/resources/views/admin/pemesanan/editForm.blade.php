@@ -53,10 +53,10 @@
                     </table>
                         @include('admin.partials.flash', ['$errors' => $errors])
                             @if (!empty($pesanan))
-                                {!! Form::model($pesanan, ['url' => ['pemesanan', $pesanan->id], 'method' => 'PUT']) !!}
+                                {!! Form::model($pesanan, ['url' => ['dokumentasi/pemesanan', $pesanan->id], 'method' => 'PUT']) !!}
                                 {!! Form::hidden('id') !!}
                             @else
-                                {!! Form::open(['url' => 'pemesanan']) !!}
+                                {!! Form::open(['url' => 'dokumentasi/pemesanan']) !!}
                             @endif
 
                         <div class="form-group mb-3 ">
@@ -68,8 +68,14 @@
 			      		</div>
 
                         <div class="form-footer pt-5 border-top text-right">
-                            <button type="submit" class="btn btn-primary btn-default">Save</button>
-                            <a href="{{ url('pemesanan') }}" class="btn btn-secondary btn-default">Back</a>
+                            <form action="{{url('dokumentasi/pemesanan/'. $pesanan->id.'/delete') }}" method="post">
+                            @csrf
+                            {{ method_field('DELETE')}}
+                              <button type="submit" class="btn btn-danger btn-default mx-4">Batalkan Pemesanan</button>
+                            </form>
+
+                            <button type="submit" class="btn btn-primary ml-4 btn-default">Save</button>
+                            <a href="{{ url('dokumentasi/pemesanan') }}" class="btn btn-secondary btn-default">Back</a>
                         </div>
                     {!! Form::close() !!}
                     

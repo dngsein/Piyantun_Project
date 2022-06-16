@@ -15,10 +15,10 @@
                 <div class="card-body">
                         @include('admin.partials.flash', ['$errors' => $errors])
                             @if (!empty($pengeluaran))
-                                {!! Form::model($pengeluaran, ['url' => ['produk', $pengeluaran->id], 'method' => 'PUT']) !!}
+                                {!! Form::model($pengeluaran, ['url' => ['dokumentasi/pengeluaran', $pengeluaran->id], 'method' => 'PUT']) !!}
                                 {!! Form::hidden('id') !!}
                             @else
-                                {!! Form::open(['url' => 'pengeluaran']) !!}
+                                {!! Form::open(['url' => 'dokumentasi/pengeluaran']) !!}
                             @endif
 
                           <div class="form-group mb-3">
@@ -54,7 +54,7 @@
                       
                         <div class="form-footer pt-5 border-top">
                             <button type="submit" class="btn btn-primary btn-default">Save</button>
-                            <a href="{{ url('pengeluaran') }}" class="btn btn-secondary btn-default">Back</a>
+                            <a href="{{ url('dokumentasi/pengeluaran') }}" class="btn btn-secondary btn-default">Back</a>
                         </div>
                     {!! Form::close() !!}
                 </div>

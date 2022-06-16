@@ -27,18 +27,29 @@
                         <tbody>
 
                         <?php $no = 1 ?>
-                            @forelse ($pesanan as $pesanan)
+                            @forelse ($pesanan as $pesanans)
+
+                                @php
+                                    $sts = [
+                                            'belum dibayar' => '<span class="badge badge-warning">Belum Dibayar</span>',
+                                            'dibayar' => '<span class="badge badge-primary">Dibayar</span>',
+                                            'diterima' => '<span class="badge badge-success">Diterima</span>',
+                                            'dibatalkan' => '<span class="badge badge-danger">Dibatalkan</span>'
+                                        ];
+                                @endphp
+
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $pesanan->user->name }}</td>
-                                    <td>{{ $pesanan->tanggal_pemesanan }}</td>
-                                    <td>Rp. {{ number_format($pesanan->jumlah_harga) }}</td>
-                                    <td>{{ $pesanan->status_pemesanan }}</td>
+                                    <td>{{ $pesanans->user->name }}</td>
+                                    <td>{{ $pesanans->tanggal_pemesanan }}</td>
+                                    <td>Rp. {{ number_format($pesanans->jumlah_harga) }}</td>
+                                    <td>{!! $sts[$pesanans->status_pemesanan] !!}</td>
                                     
                                 
                                     <td>
-                                        <a href="{{ url('pemesanan/'. $pesanan->id .'/edit') }}" class="btn btn-warning btn-sm">Edit Status</a>
-                                   
+                                        @if ($pesanans->status_pemesanan!='dibatalkan')
+                                        <a href="{{ url('dokumentasi/pemesanan/'. $pesanans->id .'/edit') }}" class="btn btn-warning btn-sm">Edit Pesanan</a>
+                                        @endif
                                     </td>
 
                                 </tr>
@@ -48,7 +59,10 @@
                             </tr>
                             @endforelse
                         </tbody>
+                        
                     </table>
+                    {{ $pesanan->links() }}
+                    
                     </div>
                 </div>
             </div>

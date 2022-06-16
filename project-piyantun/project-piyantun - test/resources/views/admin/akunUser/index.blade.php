@@ -13,6 +13,7 @@
                     </div>
                     <div class="card-body">
                     @include('admin.partials.flash')
+                    <a href="{{url('profile-pengguna/pdf')}}" class="btn btn-warning btn-md" >Export PDF</a>
                     <div class="table-responsive">
                     <table class="table">
                     <thead class="table-primary">
@@ -26,9 +27,10 @@
                             <th>Role</th>
                         </thead>
                         <tbody>
+                            <?php $no = 1 ?>
                             @forelse ($users as $user)
                                 <tr>
-                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $no++ }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->tempat_lahir }}</td>
@@ -45,6 +47,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    {{$users->links()}}
                         </div>
                         </div>
                     </div>

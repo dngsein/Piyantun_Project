@@ -59,7 +59,7 @@ class PengeluaranController extends Controller
             Session::flash('error', 'Bagal disimpan');
         }
 
-        return redirect('pengeluaran');
+        return redirect('dokumentasi/pengeluaran');
     }
 
     /**
@@ -118,7 +118,7 @@ class PengeluaranController extends Controller
             Session::flash('error', 'Perubahan gagal disimpan');
         }
 
-        return redirect('pengeluaran');
+        return redirect('dokumentasi/pengeluaran');
     }
 
     /**
